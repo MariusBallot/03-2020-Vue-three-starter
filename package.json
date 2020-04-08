@@ -9,10 +9,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "glsl-noise": "0.0.0",
-    "glslify": "^7.0.0",
-    "glslify-loader": "^2.0.0",
-    "raw-loader": "^4.0.0",
     "three": "^0.114.0",
     "vue": "^2.6.11"
   },

@@ -4,8 +4,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import RAF from '../utils/raf'
 
-import Tube from './Tube'
-
 class ThreeScene {
     constructor() {
         this.bind()
@@ -14,7 +12,6 @@ class ThreeScene {
         this.scene
         this.renderer
         this.controls
-        this.mouse = new THREE.Vector2(0, 0)
     }
 
     init() {
@@ -25,8 +22,8 @@ class ThreeScene {
 
         this.scene = new THREE.Scene()
 
-        this.camera = new THREE.PerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.1, 1000)
-        this.camera.position.set(0, 0, -1)
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+        this.camera.position.set(0, 0, 5)
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.enabled = true
         this.controls.maxDistance = 1500
@@ -37,22 +34,15 @@ class ThreeScene {
         pointLight.position.set(10, 10, 0)
         this.scene.add(light, pointLight)
 
-        new Tube(this.scene)
+        const cube = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshNormalMaterial())
+        this.scene.add(cube)
 
         window.addEventListener("resize", this.resizeCanvas)
         RAF.subscribe('threeSceneUpdate', this.update)
     }
 
-    mouseMove(e) {
-        this.mouse.x = e.clientX - window.innerWidth / 2
-        this.mouse.y = e.clientY - window.innerHeight / 2
-    }
-
     update() {
         this.renderer.render(this.scene, this.camera);
-
-        this.camera.position.x += (this.mouse.x / 2000 - this.camera.position.x) * 0.05
-        this.camera.position.y += (this.mouse.y / 2000 - this.camera.position.y) * 0.05
     }
 
 
@@ -66,9 +56,6 @@ class ThreeScene {
         this.resizeCanvas = this.resizeCanvas.bind(this)
         this.update = this.update.bind(this)
         this.init = this.init.bind(this)
-        this.mouseMove = this.mouseMove.bind(this)
-
-        window.addEventListener('mousemove', this.mouseMove)
     }
 }
 
