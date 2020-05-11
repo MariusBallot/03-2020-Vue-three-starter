@@ -16,11 +16,6 @@ module.exports = {
             .use('glslify-loader')
             .loader('glslify-loader')
             .end()
-            .rule('model')
-            .test(/\.(glb)$/)
-            .use('raw-loader')
-            .loader('raw-loader')
-            .end()
         // Add another loader
     },
 
