@@ -3,6 +3,8 @@ import * as THREE from "three"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import RAF from '../utils/raf'
+import config from '../utils/config'
+import MyGui from '../utils/MyGui'
 
 class ThreeScene {
     constructor() {
@@ -25,9 +27,12 @@ class ThreeScene {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
         this.camera.position.set(0, 0, 5)
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-        this.controls.enabled = true
+        this.controls.enabled = config.controls
         this.controls.maxDistance = 1500
         this.controls.minDistance = 0
+
+        if (config.myGui)
+            MyGui.start()
 
         let light = new THREE.AmbientLight()
         let pointLight = new THREE.PointLight()
