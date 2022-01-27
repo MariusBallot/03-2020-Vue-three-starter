@@ -11,7 +11,7 @@
     "core-js": "^3.6.5",
     "glslify-loader": "^2.0.0",
     "raw-loader": "^4.0.2",
-    "three": "^0.114.0",
+    "three": "^0.137.0",
     "vue": "^2.6.12"
   },
   "devDependencies": {
